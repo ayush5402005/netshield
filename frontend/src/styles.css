@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-ink text-slate-100 antialiased;
+}
+
+button {
+  @apply rounded-lg px-4 py-2 font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+input,
+select {
+  @apply min-h-11 rounded-lg border border-slate-700 bg-slate-950 px-3 text-slate-100 outline-none focus:border-cyan;
+}
+
+.card {
+  @apply rounded-xl border border-slate-800 bg-panel/80 shadow-2xl shadow-black/20;
+}
+
+.page-title {
+  @apply text-3xl font-black tracking-tight text-white md:text-5xl;
+}
+

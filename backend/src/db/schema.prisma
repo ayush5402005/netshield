@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum RuleAction {
+  block
+  allow
+}
+
+enum EventType {
+  domain_visited
+  domain_blocked
+  device_seen
+  new_device
+  alert_created
+  rule_changed
+  threat_detected
+  system_health_changed
+}
+
+enum AlertSeverity {
+  info
+  low
+  medium
+  high
+  critical
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("admin_users")
+}
+
+model Rule {
+  id        Int        @id @default(autoincrement())
+  domain    String
+  action    RuleAction
+  groupName String?    @map("group_name")
+  createdAt DateTime   @default(now()) @map("created_at")
+
+  @@unique([domain, action, groupName])
+  @@map("rules")
+}
+
+model Device {
+  id              Int      @id @default(autoincrement())
+  ip              String   @unique
+  mac             String?
+  hostname        String?
+  firstSeen       DateTime @default(now()) @map("first_seen")
+  lastSeen        DateTime @default(now()) @map("last_seen")
+  totalQueries    Int      @default(0) @map("total_queries")
+  blockedAttempts Int      @default(0) @map("blocked_attempts")
+
+  @@map("devices")
+}
+
+model DnsLog {
+  id        Int      @id @default(autoincrement())
+  domain    String
+  clientIp  String   @map("client_ip")
+  action    String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([domain])
+  @@index([clientIp])
+  @@index([createdAt])
+  @@map("dns_logs")
+}
+
+model Event {
+  id        Int       @id @default(autoincrement())
+  type      EventType
+  payload   Json
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@index([type])
+  @@index([createdAt])
+  @@map("events")
+}
+
+model Alert {
+  id        Int           @id @default(autoincrement())
+  type      String
+  severity  AlertSeverity
+  deviceIp  String?       @map("device_ip")
+  message   String
+  resolved  Boolean       @default(false)
+  createdAt DateTime      @default(now()) @map("created_at")
+
+  @@index([severity])
+  @@index([resolved])
+  @@index([createdAt])
+  @@map("alerts")
+}
+
+model AnalyticsSnapshot {
+  id        Int      @id @default(autoincrement())
+  data      Json
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([createdAt])
+  @@map("analytics_snapshots")
+}
+
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("settings")
+}
