@@ -18,24 +18,6 @@ The project is built for a realistic small-office use case: one machine runs Net
 - JWT-based admin login
 - Responsive light-theme React dashboard
 
-## Screenshots
-
-Add screenshots before pushing to GitHub:
-
-```text
-screenshots/Alert-page.png
-screenshots/live-traffic.png
-screenshots/website-blocking.png
-screenshots/reports.png
-```
-
-Recommended screenshots:
-
-- Dashboard overview
-- Website Blocking page
-- Live Traffic page
-- Devices page
-- Reports page
 
 ## Tech Stack
 
