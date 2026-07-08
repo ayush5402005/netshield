@@ -23,10 +23,10 @@ The project is built for a realistic small-office use case: one machine runs Net
 Add screenshots before pushing to GitHub:
 
 ```text
-documents/screenshots/dashboard.png
-documents/screenshots/live-traffic.png
-documents/screenshots/website-blocking.png
-documents/screenshots/reports.png
+screenshots\Alert-page.png
+screenshots/live-traffic.png
+screenshots/website-blocking.png
+screenshots/reports.png
 ```
 
 Recommended screenshots:
