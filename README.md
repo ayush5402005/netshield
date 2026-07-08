@@ -23,7 +23,7 @@ The project is built for a realistic small-office use case: one machine runs Net
 Add screenshots before pushing to GitHub:
 
 ```text
-screenshots\Alert-page.png
+screenshots/Alert-page.png
 screenshots/live-traffic.png
 screenshots/website-blocking.png
 screenshots/reports.png
